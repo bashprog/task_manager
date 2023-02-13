@@ -41,17 +41,13 @@
   grid-template-rows: repeat(5, 1fr);
   grid-template-columns: repeat(7, 1fr);
   div {
-    border: 2px solid gray;
-    border-left: 0;
-    border-bottom: 0;
+    border-right: 2px solid gray;
+    border-bottom: 2px solid gray;
     box-sizing: border-box;
     padding: 30px;
     height: 120px;
     &:nth-child(7n-6) {
       border-left: 2px solid gray;
-    }
-    &:nth-child(n + 29) {
-      border-bottom: 2px solid gray;
     }
   }
 }
