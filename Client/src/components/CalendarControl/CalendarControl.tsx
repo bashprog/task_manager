@@ -8,7 +8,6 @@ const CalendarControl: React.FC = () => {
     return (
         <div className={'calendar-control'}>
             <div className={'today'}>
-                <span>Today</span>
                 <p>12 July, 2023</p>
             </div>
             <div className={'caret-control flex'}>
