@@ -1,11 +1,12 @@
 import React from "react";
 
 import './Calendar.scss';
+import CalendarControl from "../CalendarControl/CalendarControl";
 
 const Calendar: React.FC = () => {
     return(
         <section className={'calendar'}>
-            asgsdg
+            <CalendarControl/>
         </section>
     )
 };

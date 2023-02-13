@@ -43,3 +43,15 @@ body {
   background: $gray;
   position: relative;
 }
+
+.btn {
+  background: $dark;
+  color: $gray-light;
+  border: 2px solid $dark;
+  transition: .3s;
+  cursor: pointer;
+  &:hover {
+    color: $dark;
+    background: $gray_light;
+  }
+}
