@@ -1,0 +1,40 @@
+@import "../../../var";
+
+.search {
+  margin-left: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  input {
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding: 10px 0 10px 25px;
+    transition: .3s;
+    width: 250px;
+    font-weight: bold;
+    &:focus {
+      outline: none;
+      border-color: $dark;
+      &::placeholder {
+        color: $dark;
+      }
+    }
+    &::placeholder {
+      transition: .3s;
+      color: lightgray;
+      font-weight: bold;
+    }
+  }
+  label {
+    transition: .3s;
+    position: absolute;
+    left: 5px;
+    color: lightgray;
+    font-size: 20px;
+    height: 20px;
+  }
+
+  input:focus + label {
+    color: $dark;
+  }
+}

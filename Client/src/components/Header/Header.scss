@@ -1,0 +1,16 @@
+@import "../../var";
+
+header {
+  width: 100%;
+  height: 100px;
+  background: $gray_light;
+  outline: 1px solid $gray_dark;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  padding-left: 100px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
