@@ -4,17 +4,22 @@ import './CalendarControl.scss';
 
 import {RxCaretLeft, RxCaretRight} from 'react-icons/rx'
 
+import {useDateStore} from "../../stores/CalendarStore";
+
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 const CalendarControl: React.FC = () => {
+    const {nextMonth, prevMonth, currentYear, currentMonth} = useDateStore();
     return (
         <div className={'calendar-control'}>
             <div className={'today'}>
-                <p>12 July, 2023</p>
+                <p>{months[currentMonth]}, {currentYear} &nbsp;&nbsp;</p>
             </div>
             <div className={'caret-control flex'}>
-                <div className="caret-left btn">
+                <div className="caret-left btn" onClick={prevMonth}>
                     <RxCaretLeft/>
                 </div>
-                <div className={'caret-right btn'}>
+                <div className={'caret-right btn'} onClick={nextMonth}>
                     <RxCaretRight/>
                 </div>
             </div>

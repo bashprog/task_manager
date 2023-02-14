@@ -45,9 +45,20 @@
     border-bottom: 2px solid gray;
     box-sizing: border-box;
     padding: 30px;
-    height: 120px;
+    height: 100px;
+    position: relative;
+    z-index: 2;
     &:nth-child(7n-6) {
       border-left: 2px solid gray;
     }
+  }
+  .day-num {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: gray;
+  }
+  .not-this-month {
+    background: $gray_dark;
   }
 }

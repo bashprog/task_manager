@@ -15,6 +15,7 @@
       margin: 0;
       position: relative;
       white-space: nowrap;
+      width: 220px;
       &::before {
         content: 'Selected';
         display: block;
@@ -51,7 +52,7 @@
   select, input {
     border: 2px solid $gray_dark;
     border-radius: 10px;
-    width: 250px;
+    width: 220px;
     color: $dark;
     font-size: 24px;
     padding: 5px;
