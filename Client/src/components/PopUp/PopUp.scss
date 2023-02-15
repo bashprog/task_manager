@@ -1,0 +1,41 @@
+@import "../../var";
+#popup {
+  width: 100%;
+  height: 100vh;
+  background: rgba(gray, .5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  opacity: 1;
+  transition: .3s opacity, visibility .3s;
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.popup {
+  padding: 15px;
+  border-radius: 15px;
+  border: 2px solid $gray-dark;
+  max-width: 800px;
+  margin: 5% auto;
+  background: $gray;
+  position: relative;
+  z-index: 1010;
+  input {
+    border: 2px solid $gray_dark;
+    border-radius: 10px;
+    width: 220px;
+    color: $dark;
+    font-size: 24px;
+    padding: 5px;
+    margin: 0 10px;
+    position: relative;
+    cursor: pointer;
+    &:focus {
+      outline: none;
+    }
+  }
+}

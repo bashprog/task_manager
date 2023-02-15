@@ -5,11 +5,13 @@ import './CalendarControl.scss';
 import {RxCaretLeft, RxCaretRight} from 'react-icons/rx'
 
 import {useDateStore} from "../../stores/CalendarStore";
+import {usePopUpStore} from "../../stores/PopUpStore";
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 const CalendarControl: React.FC = () => {
     const {nextMonth, prevMonth, currentYear, currentMonth} = useDateStore();
+    const {toggle} = usePopUpStore();
     return (
         <div className={'calendar-control'}>
             <div className={'today'}>
@@ -32,7 +34,7 @@ const CalendarControl: React.FC = () => {
                 <input id={'start-date'} type={'date'}/>
                 <input id={'end-date'} type={'date'}/>
             </div>
-            <div className={'add-button btn flex center'}>
+            <div className={'add-button btn flex center'} onClick={toggle}>
                 <span>+ Add Event</span>
             </div>
         </div>

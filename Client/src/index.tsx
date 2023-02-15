@@ -6,6 +6,7 @@ import './main.scss';
 import NavBar from "./components/NavBar/NavBar";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
+import PopUpContainer from "./containers/PopUpContainer/PopUpContainer";
 
 const root = ReactDOM.createRoot(document.getElementById("app") as HTMLElement);
 //
@@ -15,6 +16,7 @@ root.render(
         <NavBar />
         <Header/>
         <Main/>
+        <PopUpContainer/>
     </div>
 )
 

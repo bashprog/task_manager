@@ -51,15 +51,17 @@ export const useDateStore = create<DateStore>()(devtools(immer((set) => ({
             state.nextMonth();
             return 1;
         })(),
+        chosenDate: new Date(state.chosenDate.setDate(state.chosenDate.getDate() + 1))
     })),
     prevDay: () => set((state) => ({
         currentDay: state.currentDay - 1 >= 1 ? state.currentDay - 1 : (function(){
             state.prevMonth();
             return getDaysInMonth(state.currentYear, state.currentMonth - 1).totalDays
         })(),
+        chosenDate: new Date(state.chosenDate.setDate(state.chosenDate.getDate() - 1))
     })),
     setDay: (num) => set(() => ({
-        currentDay: num
+        currentDay: num,
     }))
 }))))
 

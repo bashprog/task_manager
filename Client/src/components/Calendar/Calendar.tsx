@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 
 import './Calendar.scss';
 
@@ -12,7 +12,7 @@ interface IProps {
     startDayNum: number
 }
 
-const Calendar: React.FC<IProps> = ({startDayName, totalDays, startDayNum}) => {
+const Calendar: React.FC<IProps> = ({totalDays, startDayNum}) => {
     const {setDay, currentDay} = useDateStore();
     return (
         <section className={'calendar'}>
@@ -44,13 +44,14 @@ const Calendar: React.FC<IProps> = ({startDayName, totalDays, startDayNum}) => {
                 <div className="calendar-nums">
                     {new Array(42).fill(null).map((el, key) => (
                         (startDayNum <= key) && (totalDays >= (key - startDayNum + 1)) ?
-                            <div data-day={key - startDayNum + 1} key={key} className={`this-month ${key-startDayNum+1 == currentDay ? 'active' : ''}`} onClick={() => setDay(key - startDayNum + 1)}>
+                            <div data-day={key - startDayNum + 1} key={key}
+                                 className={`this-month ${key - startDayNum + 1 == currentDay ? 'active' : ''}`}
+                                 onClick={() => setDay(key - startDayNum + 1)}>
                                 <span className={'day-num'}>{key - startDayNum + 1}</span>
                             </div>
                             :
                             <div data-day={key - startDayNum + 1} key={key} className={'not-this-month'}/>
                     ))}
-
                 </div>
             </div>
         </section>
