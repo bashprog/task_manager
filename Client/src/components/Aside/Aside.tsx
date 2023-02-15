@@ -6,95 +6,101 @@ import {RxCaretLeft, RxCaretRight} from "react-icons/rx";
 
 import placeholder from "../../img/avatar.jpg"
 
+import {useDateStore} from "../../stores/CalendarStore";
+
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 const Aside: React.FC = () => {
+    const {nextDay, prevDay, currentDay, currentMonth, currentYear} = useDateStore();
+    console.log(currentDay);
     return(
         <div className={'aside'}>
             <div className={'day-box'}>
                 <div className={'day-settings flex center'}>
                     <div className={'today'}>
-                        <p>12 July, 2023</p>
+                        <p>{currentDay} {months[currentMonth]}, {currentYear}</p>
                     </div>
                     <div className={'caret-control-aside flex'}>
-                        <div className="caret-left btn">
+                        <div className="caret-left btn" onClick={prevDay}>
                             <RxCaretLeft/>
                         </div>
-                        <div className={'caret-right btn'}>
+                        <div className={'caret-right btn'} onClick={nextDay}>
                             <RxCaretRight/>
                         </div>
                     </div>
                 </div>
                 <div className="time">
                     <div>
-                        00:00
+                        <span>00:00</span>
                     </div>
                     <div>
-                        1:00
+                        <span>1:00</span>
                     </div>
                     <div>
-                        2:00
+                        <span>2:00</span>
                     </div>
                     <div>
-                        3:00
+                        <span>3:00</span>
                     </div>
                     <div>
-                        4:00
+                        <span>4:00</span>
                     </div>
                     <div>
-                        5:00
+                        <span>5:00</span>
                     </div>
                     <div>
-                        6:00
+                        <span>6:00</span>
                     </div>
                     <div>
-                        7:00
+                        <span>7:00</span>
                     </div>
                     <div>
-                        8:00
+                        <span>8:00</span>
                     </div>
                     <div>
-                        9:00
+                        <span>9:00</span>
                     </div>
                     <div>
-                        10:00
+                        <span>10:00</span>
                     </div>
                     <div>
-                        11:00
+                        <span>11:00</span>
                     </div>
                     <div>
-                        12:00
+                        <span>12:00</span>
                     </div>
                     <div>
-                        13:00
+                        <span>13:00</span>
                     </div>
                     <div>
-                        14:00
+                        <span>14:00</span>
                     </div>
                     <div>
-                        15:00
+                        <span>15:00</span>
                     </div>
                     <div>
-                        16:00
+                        <span>16:00</span>
                     </div>
                     <div>
-                        17:00
+                        <span>17:00</span>
                     </div>
                     <div>
-                        18:00
+                        <span>18:00</span>
                     </div>
                     <div>
-                        19:00
+                        <span>19:00</span>
                     </div>
                     <div>
-                        20:00
+                        <span>20:00</span>
                     </div>
                     <div>
-                        21:00
+                        <span>21:00</span>
                     </div>
                     <div>
-                        22:00
+                        <span>22:00</span>
                     </div>
                     <div>
-                        23:00
+                        <span>23:00</span>
                     </div>
                 </div>
             </div>
