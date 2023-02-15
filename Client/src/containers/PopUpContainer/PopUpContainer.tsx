@@ -2,20 +2,23 @@ import React, {useEffect, useState} from "react";
 
 import {usePopUpStore} from "../../stores/PopUpStore";
 import {useDateStore} from "../../stores/CalendarStore";
+
 import PopUp from "../../components/PopUp/PopUp";
+
+import {toISOStringWithTimezone} from "../../helpers/datesHelper";
 
 const PopUpContainer: React.FC = () => {
     const chosenDate = useDateStore(state => state.chosenDate);
     //Решил адейтить так, я хз как это правильно делать
     useEffect(() => {
-        changeEndDate(chosenDate.toISOString().substring(0, 10));
-        changeStartDate(chosenDate.toISOString().substring(0, 10));
+        changeStartDate(toISOStringWithTimezone(chosenDate).substring(0, 10));
+        changeEndDate(toISOStringWithTimezone(chosenDate).substring(0, 10));
     }, [chosenDate])
 
     const {toggle, isActive} = usePopUpStore();
 
-    const [startDate, changeStartDate] = useState(chosenDate.toISOString().substring(0, 10));
-    const [endDate, changeEndDate] = useState(chosenDate.toISOString().substring(0, 10))
+    const [startDate, changeStartDate] = useState(toISOStringWithTimezone(chosenDate).substring(0, 10));
+    const [endDate, changeEndDate] = useState(toISOStringWithTimezone(chosenDate).substring(0, 10))
 
     const toggleVisibility = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         (e.target as any).id == 'popup' ? toggle() : null

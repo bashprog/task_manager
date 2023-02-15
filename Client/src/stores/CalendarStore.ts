@@ -60,8 +60,9 @@ export const useDateStore = create<DateStore>()(devtools(immer((set) => ({
         })(),
         chosenDate: new Date(state.chosenDate.setDate(state.chosenDate.getDate() - 1))
     })),
-    setDay: (num) => set(() => ({
+    setDay: (num) => set((state) => ({
         currentDay: num,
+        chosenDate: new Date(state.currentYear, state.currentMonth, num)
     }))
 }))))
 

@@ -21,21 +21,37 @@
   border: 2px solid $gray-dark;
   max-width: 800px;
   margin: 5% auto;
-  background: $gray;
+  background: $gray-light;
   position: relative;
+  box-sizing: border-box;
   z-index: 1010;
   input {
     border: 2px solid $gray_dark;
     border-radius: 10px;
-    width: 220px;
+    width: 250px;
+    margin: 30px;
     color: $dark;
     font-size: 24px;
     padding: 5px;
-    margin: 0 10px;
     position: relative;
     cursor: pointer;
+    overflow: visible;
     &:focus {
       outline: none;
+    };
+    &#task-start-date::before {
+      display: block;
+      content: 'Start date';
+      position: absolute;
+      top: -30px;
+      color: lightgray;
+    };
+    &#task-end-date::before {
+      display: block;
+      content: 'End date';
+      position: absolute;
+      top: -30px;
+      color: lightgray;
     }
   }
 }
