@@ -15,7 +15,8 @@ interface DateStore {
     nextMonth: () => void,
     prevMonth: () => void,
     nextDay: () => void,
-    prevDay: () => void
+    prevDay: () => void,
+    setDay: (num: number) => void,
 }
 
 export const useDateStore = create<DateStore>()(devtools(immer((set) => ({
@@ -57,5 +58,8 @@ export const useDateStore = create<DateStore>()(devtools(immer((set) => ({
             return getDaysInMonth(state.currentYear, state.currentMonth - 1).totalDays
         })(),
     })),
+    setDay: (num) => set(() => ({
+        currentDay: num
+    }))
 }))))
 

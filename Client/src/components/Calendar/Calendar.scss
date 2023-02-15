@@ -61,4 +61,14 @@
   .not-this-month {
     background: $gray_dark;
   }
+  .this-month {
+    cursor: pointer;
+    transition: .3s;
+    &.active {
+      background: lightgray;
+    }
+    &:hover {
+      background: lightgray;
+    }
+  }
 }
