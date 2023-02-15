@@ -43,8 +43,8 @@ export const useDateStore = create<DateStore>()(devtools(immer((set) => ({
         currentYear: state.currentMonth - 1 >= 0 ? state.currentYear : state.currentYear - 1,
         currentMonth: state.currentMonth - 1 >= 0 ? state.currentMonth - 1 : 11,
         chosenDate: state.currentMonth - 1 >= 0 ?
-            new Date(state.currentYear, state.currentMonth - 1, 1) :
-            new Date(state.currentYear - 1, 11, 1)
+            new Date(state.currentYear, state.currentMonth - 1,  getDaysInMonth(state.currentYear, state.currentMonth - 1).totalDays) :
+            new Date(state.currentYear - 1, 11,  getDaysInMonth(state.currentYear -1 , 11).totalDays)
     })),
     nextDay: () => set((state) => ({
         currentDay: state.currentDay + 1 <= getDaysInMonth(state.currentYear, state.currentMonth).totalDays ? state.currentDay + 1 : (function () {
