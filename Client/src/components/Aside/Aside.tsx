@@ -12,7 +12,7 @@ const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 
 const Aside: React.FC = () => {
     const {nextDay, prevDay, currentDay, currentMonth, currentYear} = useDateStore();
-    console.log(currentDay);
+
     return(
         <div className={'aside'}>
             <div className={'day-box'}>

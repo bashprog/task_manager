@@ -57,6 +57,7 @@
     bottom: 5px;
     right: 5px;
     color: gray;
+    transition: .3s;
   }
   .not-this-month {
     background: $gray_dark;
@@ -66,6 +67,9 @@
     transition: .3s;
     &.active {
       background: lightgray;
+      .day-num {
+        color: $dark;
+      }
     }
     &:hover {
       background: lightgray;
