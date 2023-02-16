@@ -19,13 +19,38 @@
   padding: 15px;
   border-radius: 15px;
   border: 2px solid $gray-dark;
-  max-width: 800px;
+  max-width: 680px;
   margin: 5% auto;
   background: $gray-light;
   position: relative;
   box-sizing: border-box;
   z-index: 1010;
-  input {
+  textarea {
+    border: 2px solid $gray_dark;
+    border-radius: 10px;
+    width: 570px;
+    margin: 30px;
+    color: $dark;
+    font-size: 24px;
+    padding: 5px;
+    position: relative;
+    cursor: pointer;
+    overflow: visible;
+    resize: none;
+    &:focus {
+      outline: none;
+    }
+    &+span {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 35px;
+      font-size: 24px;
+      color: lightgray;
+      user-select: none;
+    }
+  }
+  input:not([type=radio]) {
     border: 2px solid $gray_dark;
     border-radius: 10px;
     width: 250px;
@@ -36,22 +61,101 @@
     position: relative;
     cursor: pointer;
     overflow: visible;
+    &[type=text] {
+      cursor: text;
+      &+span {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 35px;
+        font-size: 24px;
+        color: lightgray;
+        user-select: none;
+      }
+    }
+
     &:focus {
       outline: none;
     };
-    &#task-start-date::before {
+    &::before {
       display: block;
-      content: 'Start date';
       position: absolute;
       top: -30px;
       color: lightgray;
+    }
+    &#task-start-date::before {
+      content: 'Start date';
     };
     &#task-end-date::before {
-      display: block;
       content: 'End date';
-      position: absolute;
-      top: -30px;
+    }
+    &#task-start-time::before {
+      content: 'Start time';
+    };
+    &#task-end-time::before {
+      content: 'End time';
+    };
+    &#task-title::before {
+      content: 'Title';
+    };
+  }
+  .choose-color {
+    .radio-container {
+      position: relative;
+      margin-top: 10px;
+      margin-left: 10px;
+      display: inline-block;
+      cursor: pointer;
+      padding: 15px;
+    }
+    span {
+      font-size: 24px;
       color: lightgray;
+      user-select: none;
+    }
+    input {
+      display: none;
+      position: relative;
+    }
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 25px;
+      height: 25px;
+      background: red;
+      box-sizing: border-box;
+      outline: 3px solid transparent;
+      transition: .3s ;
+      &.success {
+        background: $success;
+      }
+      &.primary {
+        background: $primary;
+      }
+      &.danger {
+        background: $danger;
+      }
+      &.warning {
+        background: $warning;
+      }
+      &::after {
+        content: "\2713";
+        position: absolute;
+        top: -5px;
+        left: 4px;
+        display: block;
+        font-weight: bold;
+        color: $gray;
+        transition: .3s linear;
+        transform: scale(0);
+      }
+    }
+    input:checked ~ .checkmark {
+      outline: 3px solid blue;
+      &::after {
+        transform: scale(1);
+      }
     }
   }
 }
