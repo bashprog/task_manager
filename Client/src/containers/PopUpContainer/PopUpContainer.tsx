@@ -37,6 +37,8 @@ const PopUpContainer: React.FC = () => {
     //TextArea
     const [textArea, changeTextArea] = useState('');
 
+    let timeDiff = (parseInt(endTime.substring(0, 2)) - parseInt(startTime.substring(0,2))) * 60 + (parseInt(endTime.substring(3)) - parseInt(startTime.substring(3)))
+
     const toggleVisibility = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         (e.target as any).id == 'popup' && toggle()
     };
@@ -103,7 +105,8 @@ const PopUpContainer: React.FC = () => {
         radioBox,
         changeRadio,
         textArea,
-        changeTextArea
+        changeTextArea,
+        timeDiff
     }
 
     return (

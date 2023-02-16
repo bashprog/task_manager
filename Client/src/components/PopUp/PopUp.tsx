@@ -21,10 +21,12 @@ interface IProps {
     radioBox: string,
     changeRadio: (e: any) => void,
     textArea: string,
-    changeTextArea: (e: any) => void
+    changeTextArea: (e: any) => void,
+    timeDiff: number
 }
 
 const PopUp: React.FC<IProps> = (props) => {
+    console.log(props.timeDiff);
     return (
         <section id={`popup`} className={`${!props.isActive && 'hidden'}`} onClick={props.toggleVisibility}>
             <div className={'popup'}>
@@ -76,6 +78,20 @@ const PopUp: React.FC<IProps> = (props) => {
                         <textarea id={'description'} rows={4} value={props.textArea}
                                   onChange={e => props.changeTextArea(e.target.value)}/>
                         <span>Description</span>
+                    </div>
+                </div>
+                <div className="flex">
+                    <div className="preview">
+                        <span>Preview</span>
+                        <br/>
+                        <div className={`task ${props.radioBox} ${props.timeDiff > 45 && 'column'}`} style={{height: `${props.timeDiff}px`}}>
+                            <span className="task-time">
+                                {props.startTime} - {props.endTime}
+                            </span>
+                            <span className="title">
+                                {props.title}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
