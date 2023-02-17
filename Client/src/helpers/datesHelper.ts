@@ -1,5 +1,5 @@
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+export const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+export const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 export function getDaysInMonth(year: number, month: number) {
     return {startDayName: days[new Date(year, month, 1).getDay()], startDayNum: new Date(year, month, 1).getDay(), totalDays: new Date(year, month+1, 0).getDate()}
@@ -31,3 +31,11 @@ export const toISOStringWithTimezone = (date: Date) => {
         diff + pad(tzOffset / 60) +
         ':' + pad(tzOffset % 60);
 };
+
+export const timeFormat = (str: any) => {
+    if (str < 10) {
+        str = `0${str}`
+    }
+
+    return `${str}`;
+}

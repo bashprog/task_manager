@@ -74,6 +74,12 @@
     height: 60px;
     box-sizing: border-box;
     border-bottom: 2px solid $gray_dark;
+    position: relative;
+    >span.time-span {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+    }
     &:last-child {
       border-bottom: 0;
     }

@@ -6,23 +6,19 @@ import {useDateStore} from "../../stores/CalendarStore";
 import PopUp from "../../components/PopUp/PopUp";
 
 import {toISOStringWithTimezone} from "../../helpers/datesHelper";
+import {useTaskStore} from "../../stores/TaskStore";
 
-const checker = (str: any) => {
-    if (str < 10) {
-        str = `0${str}`
-    }
-
-    return `${str}`;
-}
+import {timeFormat} from "../../helpers/datesHelper";
 
 const PopUpContainer: React.FC = () => {
+    const {addTask} = useTaskStore();
     const chosenDate = useDateStore(state => state.chosenDate);
     //Решил адейтить так, я хз как это правильно делать
     useEffect(() => {
         changeStartDate(toISOStringWithTimezone(chosenDate).substring(0, 10));
         changeEndDate(toISOStringWithTimezone(chosenDate).substring(0, 10));
     }, [chosenDate])
-
+    //PopUp status
     const {toggle, isActive} = usePopUpStore();
     //Dates
     const [startDate, changeStartDate] = useState(toISOStringWithTimezone(chosenDate).substring(0, 10));
@@ -64,13 +60,13 @@ const PopUpContainer: React.FC = () => {
         let minutes = e.substring(3);
 
         if (minutes < 30) {
-            minutes = checker(parseInt(minutes)+30)
+            minutes = timeFormat(parseInt(minutes)+30)
         } else {
-            minutes = checker(parseInt(minutes) + 30 - 60)
+            minutes = timeFormat(parseInt(minutes) + 30 - 60)
             if (startDate == endDate) {
-                hours < 23 ? hours = checker(parseInt(hours) + 1) : minutes = '59';
+                hours < 23 ? hours = timeFormat(parseInt(hours) + 1) : minutes = '59';
             } else {
-                hours < 23 ? hours = checker(parseInt(hours) + 1) : hours = '00';
+                hours < 23 ? hours = timeFormat(parseInt(hours) + 1) : hours = '00';
             }
         }
 
@@ -89,6 +85,28 @@ const PopUpContainer: React.FC = () => {
         (e.target.value < startTime) && changeStartTime(e.target.value);
     }
 
+    const addTaskHandler = () => {
+          const task = {
+              id: Math.random(),
+              startDate: startDate,
+              startYear: new Date(startDate).getFullYear(),
+              startMonth: new Date(startDate).getMonth(),
+              startDay: new Date(startDate).getDate(),
+              endDate: endDate,
+              endYear: new Date(endDate).getFullYear(),
+              endMonth: new Date(endDate).getMonth(),
+              endDay: new Date(endDate).getDate(),
+              startTime: startTime,
+              endTime: endTime,
+              title: title,
+              description: textArea,
+              timeDiffInMinutes: timeDiff,
+              color: radioBox
+          }
+
+          addTask(task);
+    };
+
     const props = {
         isActive,
         toggleVisibility,
@@ -106,7 +124,8 @@ const PopUpContainer: React.FC = () => {
         changeRadio,
         textArea,
         changeTextArea,
-        timeDiff
+        timeDiff,
+        addTaskHandler
     }
 
     return (

@@ -4,6 +4,7 @@ import './PopUp.scss';
 
 import {usePopUpStore} from "../../stores/PopUpStore";
 import {useDateStore} from "../../stores/CalendarStore";
+import Task from "../Task/Task";
 
 interface IProps {
     toggleVisibility: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void,
@@ -22,11 +23,11 @@ interface IProps {
     changeRadio: (e: any) => void,
     textArea: string,
     changeTextArea: (e: any) => void,
-    timeDiff: number
+    timeDiff: number,
+    addTaskHandler: () => void
 }
 
 const PopUp: React.FC<IProps> = (props) => {
-    console.log(props.timeDiff);
     return (
         <section id={`popup`} className={`${!props.isActive && 'hidden'}`} onClick={props.toggleVisibility}>
             <div className={'popup'}>
@@ -81,17 +82,29 @@ const PopUp: React.FC<IProps> = (props) => {
                     </div>
                 </div>
                 <div className="flex">
-                    <div className="preview">
+                    <div className="preview" style={{height: `${props.timeDiff}px`}}>
                         <span>Preview</span>
                         <br/>
-                        <div className={`task ${props.radioBox} ${props.timeDiff > 45 && 'column'}`} style={{height: `${props.timeDiff}px`}}>
-                            <span className="task-time">
-                                {props.startTime} - {props.endTime}
-                            </span>
-                            <span className="title">
-                                {props.title}
-                            </span>
-                        </div>
+                        <Task id={'preview'}
+                              startDate={props.startDate}
+                              startYear={parseInt(props.startDate.substring(0, 4))}
+                              startMonth={parseInt(props.startDate.substring(5, 7)) - 1}
+                              startDay={parseInt(props.startDate.substring(8, 10))}
+                              endDate={props.endDate}
+                              endYear={parseInt(props.endDate.substring(0, 4))}
+                              endMonth={parseInt(props.endDate.substring(5, 7)) - 1}
+                              endDay={parseInt(props.endDate.substring(8, 10))}
+                              startTime={props.startTime}
+                              endTime={props.endTime}
+                              title={props.title}
+                              description={props.textArea}
+                              color={props.radioBox}
+                              timeDiffInMinutes={props.timeDiff}/>
+                    </div>
+                </div>
+                <div className="flex">
+                    <div className="btn add-btn" onClick={props.addTaskHandler}>
+                        Add task
                     </div>
                 </div>
             </div>

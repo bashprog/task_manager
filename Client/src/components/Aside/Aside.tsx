@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import './Aside.scss';
 
@@ -7,11 +7,19 @@ import {RxCaretLeft, RxCaretRight} from "react-icons/rx";
 import placeholder from "../../img/avatar.jpg"
 
 import {useDateStore} from "../../stores/CalendarStore";
+import {useTaskStore} from "../../stores/TaskStore";
+import {timeFormat, months} from "../../helpers/datesHelper";
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+import Task from "../Task/Task";
 
 const Aside: React.FC = () => {
     const {nextDay, prevDay, currentDay, currentMonth, currentYear} = useDateStore();
+
+    const {sortByDate, sortedArray, tasks} = useTaskStore();
+
+    useEffect(() => {
+        sortByDate(currentYear, currentMonth, currentDay);
+    }, [currentDay, currentMonth, currentYear, tasks]);
 
     return(
         <div className={'aside'}>
@@ -30,30 +38,16 @@ const Aside: React.FC = () => {
                     </div>
                 </div>
                 <div className="time">
-                    <div data-time={'00:00'}><span>00:00</span></div>
-                    <div data-time={'1:00'}><span>1:00</span></div>
-                    <div data-time={'2:00'}><span>2:00</span></div>
-                    <div data-time={'3:00'}><span>3:00</span></div>
-                    <div data-time={'4:00'}><span>4:00</span></div>
-                    <div data-time={'5:00'}><span>5:00</span></div>
-                    <div data-time={'6:00'}><span>6:00</span></div>
-                    <div data-time={'7:00'}><span>7:00</span></div>
-                    <div data-time={'8:00'}><span>8:00</span></div>
-                    <div data-time={'9:00'}><span>9:00</span></div>
-                    <div data-time={'10:00'}><span>10:00</span></div>
-                    <div data-time={'11:00'}><span>11:00</span></div>
-                    <div data-time={'12:00'}><span>12:00</span></div>
-                    <div data-time={'13:00'}><span>13:00</span></div>
-                    <div data-time={'14:00'}><span>14:00</span></div>
-                    <div data-time={'15:00'}><span>15:00</span></div>
-                    <div data-time={'16:00'}><span>16:00</span></div>
-                    <div data-time={'17:00'}><span>17:00</span></div>
-                    <div data-time={'18:00'}><span>18:00</span></div>
-                    <div data-time={'19:00'}><span>19:00</span></div>
-                    <div data-time={'20:00'}><span>20:00</span></div>
-                    <div data-time={'21:00'}><span>21:00</span></div>
-                    <div data-time={'22:00'}><span>22:00</span></div>
-                    <div data-time={'23:00'}><span>23:00</span></div>
+                    {new Array(24).fill(null).map((el, key) => (
+                        <div data-time={`${timeFormat(key)}:00`} key={key}>
+                            {sortedArray.map((el: any) => (
+                                el.startTime.substring(0,2) == timeFormat(key) ?
+                                    <Task {... el} key={el.id}/>
+                                : null
+                            ))}
+                            <span className="time-span">{`${timeFormat(key)}:00`}</span>
+                        </div>
+                    ))}
                 </div>
             </div>
             <div className={'event'}>
