@@ -11,11 +11,14 @@ import {useTaskStore} from "../../stores/TaskStore";
 import {timeFormat, months} from "../../helpers/datesHelper";
 
 import Task from "../Task/Task";
+import Event from "../Event/Event";
 
 const Aside: React.FC = () => {
     const {nextDay, prevDay, currentDay, currentMonth, currentYear} = useDateStore();
 
-    const {sortByDate, sortedArray, tasks} = useTaskStore();
+    const {sortByDate, sortedArray, tasks, chosenTask} = useTaskStore();
+
+    console.log(chosenTask)
 
     useEffect(() => {
         sortByDate(currentYear, currentMonth, currentDay);
@@ -42,7 +45,7 @@ const Aside: React.FC = () => {
                         <div data-time={`${timeFormat(key)}:00`} key={key}>
                             {sortedArray.map((el: any) => (
                                 el.startTime.substring(0,2) == timeFormat(key) ?
-                                    <Task {... el} key={el.id}/>
+                                    <Task {... el} key={el.id} maxHeight={(24-key)*60}/>
                                 : null
                             ))}
                             <span className="time-span">{`${timeFormat(key)}:00`}</span>
@@ -50,43 +53,7 @@ const Aside: React.FC = () => {
                     ))}
                 </div>
             </div>
-            <div className={'event'}>
-                <span className="title">
-                    Meeting with devs
-                </span>
-                <span className="date">
-                    12 July, 2023. 15:00-16:30
-                </span>
-                <span className={'description'}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, repellat?
-                </span>
-                <div className="avatars">
-                    <div>
-                        <img src={placeholder} alt=""/>
-                    </div>
-                    <div>
-                        <img src={placeholder} alt=""/>
-                    </div>
-                    <div>
-                        <img src={placeholder} alt=""/>
-                    </div>
-                    <div>
-                        <img src={placeholder} alt=""/>
-                    </div>
-                    <div>
-                        <img src={placeholder} alt=""/>
-                    </div>
-                    <div>
-                        <img src={placeholder} alt=""/>
-                    </div>
-                    <div className={'last-count'}>
-                        +78
-                    </div>
-                </div>
-                <div className={'btn action'}>
-                    Send request
-                </div>
-            </div>
+            <Event {... chosenTask}/>
         </div>
     )
 };

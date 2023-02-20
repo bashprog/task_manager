@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 import './PopUp.scss';
 
-import {usePopUpStore} from "../../stores/PopUpStore";
-import {useDateStore} from "../../stores/CalendarStore";
 import Task from "../Task/Task";
 
 interface IProps {

@@ -4,12 +4,26 @@
   position: absolute;
   left: 55px;
   min-height: 30px;
-  //max-height: 150px;
   padding-left: 10px;
   display: inline-flex;
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
   z-index: 200;
+  &:hover {
+    z-index: 220;
+    &.success {
+      background: $success_light;
+    }
+    &.warning {
+      background: $warning_light;
+    }
+    &.primary {
+      background: $primary_light;
+    }
+    &.danger {
+      background: $danger_light;
+    }
+  }
   &.column {
     flex-direction: column;
     justify-content: center;
@@ -31,25 +45,25 @@
     border-radius: 20px;
   }
   &.success {
-    background: $success_light;
+    background: rgba($success_light, .5);
     &::before{
       background: $success;
     }
   }
   &.primary {
-    background: $primary_light;
+    background: rgba($primary_light, .5);
     &::before {
       background: $primary;
     }
   }
   &.danger {
-    background: $danger_light;
+    background: rgba($danger_light, .5);
     &::before {
       background: $danger;
     }
   }
   &.warning {
-    background: $warning_light;
+    background: rgba($warning_light, .5);
     &::before {
       background: $warning;
     }

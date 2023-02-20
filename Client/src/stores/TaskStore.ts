@@ -29,6 +29,8 @@ interface Task {
 interface TaskStore {
     tasks: Task[],
     sortedArray: Task[] | [],
+    chosenTask: Task | null,
+    choseTask: (id: number | string) => void,
     addTask: (task: Task) => void,
     sortByDate: (year: number, month: number, day: number) => void
 }
@@ -36,6 +38,10 @@ interface TaskStore {
 export const useTaskStore = create<TaskStore>()(devtools(immer((set) => ({
     tasks: [],
     sortedArray: [],
+    chosenTask: null,
+    choseTask: id => set(state => ({
+        chosenTask: state.tasks.filter(el => el.id === id)[0]
+    })),
     addTask: task => set(state => {
         state.tasks.push(task)
     }),
