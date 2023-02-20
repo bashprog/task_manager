@@ -27,7 +27,7 @@ interface IProps {
 
 const PopUp: React.FC<IProps> = (props) => {
     return (
-        <section id={`popup`} className={`${!props.isActive && 'hidden'}`} onClick={props.toggleVisibility}>
+        <section id={`popup`} className={`${!props.isActive && 'hidden'}`} onMouseDown={props.toggleVisibility}>
             <div className={'popup'}>
                 <div className="flex">
                     <input type="date" id={'task-start-date'} value={props.startDate}

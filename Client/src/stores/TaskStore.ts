@@ -3,36 +3,22 @@ import {create} from "zustand";
 import {devtools} from "zustand/middleware";
 import {immer} from "zustand/middleware/immer";
 
+import {timeFormat} from "../helpers/datesHelper";
+import {useDateStore} from './CalendarStore';
+
 interface Person {
 
 }
 
-interface Task {
-    id: number,
-    startDate: string,
-    startYear: number,
-    startMonth: number,
-    startDay: number,
-    endDate: string,
-    endYear: number,
-    endMonth: number,
-    endDay: number,
-    startTime: string,
-    endTime: string,
-    title: string,
-    description: string,
-    color: string,
-    timeDiffInMinutes: number,
-    members?: Person[]
-}
-
 interface TaskStore {
     tasks: TaskClass[],
-    sortedArray: Task[] | [],
-    chosenTask: Task | null,
-    choseTask: (id: number | string) => void,
-    addTask: (task: Task) => void,
-    sortByDate: (year: number, month: number, day: number) => void
+    sortedArray: TaskClass[] | [],
+    sortedForCalendar: any,
+    chosenTask: TaskClass | null,
+    selectTaskById: (id: number | string) => void,
+    addTask: (task: any) => void,
+    sortByDate: (year: number, month: number, day: number) => void,
+    sortByMonth: (year: number, month: number) => void
 }
 
 class TaskClass {
@@ -107,11 +93,12 @@ class TaskClass {
 
     }
 
-    sortConditions(year: number, month: number, day: number){
+    sortConditions(year: number, month: number, day: number): boolean{
         let startTimer = new Date(this.startYear, this.startMonth, this.startDay).getTime();
         let endTimer = new Date(this.endYear, this.endMonth, this.endDay).getTime();
         let date = new Date(year, month, day).getTime();
-        return (date && startTimer <= date && endTimer >= date);
+
+        return (startTimer <= date && endTimer >= date);
     }
 
     getTimeInDay(day: number){
@@ -124,31 +111,29 @@ class TaskClass {
             let minsDiffStart = (this.startDateWithTime.getTime() - date.getTime())/1000/60;
             let minsDiffEnd = (this.endDateWithTime.getTime() - date.getTime())/1000/60;
 
-            console.log(minsDiffStart, minsDiffEnd);
-
             if (minsDiffStart > 0 && minsDiffStart < 1140) {
-                startTime = `${Math.floor(minsDiffStart/60)}:${minsDiffStart%60}`
+                startTime = `${timeFormat(Math.floor(minsDiffStart/60))}:${timeFormat(minsDiffStart%60)}`
             } else {
                 startTime = '00:00'
             }
 
             if (minsDiffEnd > 0 && minsDiffEnd < 1140) {
-                endTime = `${Math.floor(minsDiffEnd/60)}:${minsDiffEnd%60}`
+                endTime = `${timeFormat(Math.floor(minsDiffEnd/60))}:${timeFormat(minsDiffEnd%60)}`
             } else {
                 endTime = '23:59'
             }
         }
 
         return [startTime, endTime];
-
     }
 }
 
 export const useTaskStore = create<TaskStore>()(devtools(immer((set) => ({
     tasks: [],
     sortedArray: [],
+    sortedForCalendar: [],
     chosenTask: null,
-    choseTask: id => set(state => ({
+    selectTaskById: id => set(state => ({
         chosenTask: state.tasks.filter(el => el.id === id)[0]
     })),
     addTask: task => set(state => {
@@ -160,5 +145,8 @@ export const useTaskStore = create<TaskStore>()(devtools(immer((set) => ({
                 return el;
             }
         })]
-    }))
+    })),
+    sortByMonth: (year, month) => set(state => ({
+        sortedForCalendar: [... state.tasks.filter(el => el.startYear == year && el.startMonth == month)]
+    })),
 }))))

@@ -78,7 +78,7 @@ const PopUpContainer: React.FC = () => {
 
     const startTimeChangeHandler = (e: any) => {
         changeStartTime(e.target.value);
-        console.log(timeDiff);
+
         (e.target.value > endTime && (new Date(startDate).getTime() === new Date(endDate).getTime())) && changeEndTime(addHalfHour(e.target.value));
     }
 
@@ -90,20 +90,12 @@ const PopUpContainer: React.FC = () => {
 
     const addTaskHandler = () => {
           const task = {
-              id: Math.random(),
               startDate: startDate,
-              startYear: new Date(startDate).getFullYear(),
-              startMonth: new Date(startDate).getMonth(),
-              startDay: new Date(startDate).getDate(),
               endDate: endDate,
-              endYear: new Date(endDate).getFullYear(),
-              endMonth: new Date(endDate).getMonth(),
-              endDay: new Date(endDate).getDate(),
               startTime: startTime,
               endTime: endTime,
               title: title,
               description: textArea,
-              timeDiffInMinutes: timeDiff,
               color: radioBox
           }
 

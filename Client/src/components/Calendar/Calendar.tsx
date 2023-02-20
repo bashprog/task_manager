@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import './Calendar.scss';
 
 import CalendarControl from "../CalendarControl/CalendarControl";
 
 import {useDateStore} from "../../stores/CalendarStore";
+import {useTaskStore} from "../../stores/TaskStore";
+import CalendarTask from "./CalendarTask";
 
 interface IProps {
     startDayName: string,
@@ -14,6 +16,10 @@ interface IProps {
 
 const Calendar: React.FC<IProps> = ({totalDays, startDayNum}) => {
     const {setDay, currentDay} = useDateStore();
+    const {sortedForCalendar} = useTaskStore();
+
+    console.log(sortedForCalendar);
+
     return (
         <section className={'calendar'}>
             <CalendarControl/>
@@ -47,6 +53,14 @@ const Calendar: React.FC<IProps> = ({totalDays, startDayNum}) => {
                             <div data-day={key - startDayNum + 1} key={key}
                                  className={`this-month ${key - startDayNum + 1 == currentDay ? 'active' : ''}`}
                                  onClick={() => setDay(key - startDayNum + 1)}>
+                                <>
+                                    {sortedForCalendar.map((el: any, idx: number) => {
+                                        console.log()
+                                        if (el.startDay == (key - startDayNum + 1)) {
+                                            return <CalendarTask key={idx}/>
+                                        }
+                                    })}
+                                </>
                                 <span className={'day-num'}>{key - startDayNum + 1}</span>
                             </div>
                             :

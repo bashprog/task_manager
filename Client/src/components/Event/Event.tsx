@@ -29,7 +29,7 @@ const Event: React.FC<IProps | any> = (props) => {
     return (
         <div className={'event'}>
             {Object.keys(props).length == 0 ?
-                <h3>Chose task</h3>
+                <h3>Choose task</h3>
                 :
                 <>
                     <span className="title">
