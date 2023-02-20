@@ -85,7 +85,7 @@ const PopUpContainer: React.FC = () => {
     const endTimeChangeHandler = (e: any) => {
         changeEndTime(e.target.value);
 
-        (e.target.value < startTime) && changeStartTime(e.target.value);
+        (e.target.value < startTime && (new Date(startDate).getTime() === new Date(endDate).getTime())) && changeStartTime(e.target.value);
     }
 
     const addTaskHandler = () => {

@@ -26,7 +26,6 @@ interface IProps {
 }
 
 const Event: React.FC<IProps | any> = (props) => {
-    console.log(props);
     return (
         <div className={'event'}>
             {Object.keys(props).length == 0 ?

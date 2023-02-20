@@ -14,11 +14,12 @@ import Task from "../Task/Task";
 import Event from "../Event/Event";
 
 const Aside: React.FC = () => {
-    const {nextDay, prevDay, currentDay, currentMonth, currentYear} = useDateStore();
+    const {nextDay, prevDay, currentDay, currentMonth, currentYear, chosenDate} = useDateStore();
 
     const {sortByDate, sortedArray, tasks, chosenTask} = useTaskStore();
 
-    console.log(chosenTask)
+    console.log(tasks.forEach(el => console.log(el.getTimeInDay(currentDay))));
+    console.log(tasks);
 
     useEffect(() => {
         sortByDate(currentYear, currentMonth, currentDay);
