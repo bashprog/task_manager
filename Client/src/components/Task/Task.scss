@@ -9,6 +9,7 @@
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
   z-index: 200;
+  cursor: pointer;
   &:hover {
     z-index: 220;
     &.success {
