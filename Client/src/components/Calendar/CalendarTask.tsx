@@ -1,8 +1,11 @@
 import React from "react";
 
-const CalendarTask: React.FC = () => {
+const CalendarTask: React.FC<any> = ({props}) => {
+    console.log(props);
     return(
-        <span>Calendar task</span>
+        <div className={`calendar-task ${props.color}`}>
+            <span>{props.title}</span>
+        </div>
     )
 };
 

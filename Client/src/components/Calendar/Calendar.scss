@@ -19,6 +19,7 @@
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   color: $gray;
+
   span {
     width: 100%;
     display: flex;
@@ -27,9 +28,11 @@
     align-items: center;
     padding: 20px 0;
     box-sizing: border-box;
+
     &:nth-child(n) {
       border-right: 2px solid gray;
     }
+
     &:last-child {
       border: 0;
     }
@@ -40,11 +43,10 @@
   display: grid;
   grid-template-rows: repeat(5, 1fr);
   grid-template-columns: repeat(7, 1fr);
-  div {
+  > div {
     border-right: 2px solid gray;
     border-bottom: 2px solid gray;
     box-sizing: border-box;
-    padding: 30px;
     height: 100px;
     position: relative;
     z-index: 2;
@@ -52,6 +54,7 @@
       border-left: 2px solid gray;
     }
   }
+
   .day-num {
     position: absolute;
     bottom: 5px;
@@ -59,20 +62,53 @@
     color: gray;
     transition: .3s;
   }
+
   .not-this-month {
     background: $gray_dark;
   }
+
   .this-month {
     cursor: pointer;
     transition: .3s;
+
     &.active {
       background: lightgray;
       .day-num {
         color: $dark;
       }
     }
+
     &:hover {
       background: lightgray;
     }
+
+    .more {
+      position: absolute;
+      left: 3px;
+      bottom: 3px;
+      opacity: 0;
+      &:last-child {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.calendar-task {
+  color: $dark;
+  &.success {
+    background: $success;
+  }
+  &.primary {
+    background: $primary;
+  }
+  &.danger {
+    background: $danger;
+  }
+  &.warning {
+    background: $warning;
+  }
+  span {
+
   }
 }

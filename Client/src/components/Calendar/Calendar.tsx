@@ -53,15 +53,16 @@ const Calendar: React.FC<IProps> = ({totalDays, startDayNum}) => {
                             <div data-day={key - startDayNum + 1} key={key}
                                  className={`this-month ${key - startDayNum + 1 == currentDay ? 'active' : ''}`}
                                  onClick={() => setDay(key - startDayNum + 1)}>
+                                <span className={'day-num'}>{key - startDayNum + 1}</span>
                                 <>
-                                    {sortedForCalendar.map((el: any, idx: number) => {
-                                        console.log()
-                                        if (el.startDay == (key - startDayNum + 1)) {
-                                            return <CalendarTask key={idx}/>
+                                    {sortedForCalendar.filter((val: any) => val.startDay == (key - startDayNum + 1)).map((el: any, idx: number) => {
+                                        if (idx < 3) {
+                                            return <CalendarTask key={el.id} props={el}/>
+                                        } else {
+                                            return <span className={'more'} key={idx}>+{idx-2} more</span>
                                         }
                                     })}
                                 </>
-                                <span className={'day-num'}>{key - startDayNum + 1}</span>
                             </div>
                             :
                             <div data-day={key - startDayNum + 1} key={key} className={'not-this-month'}/>
