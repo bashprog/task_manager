@@ -15,8 +15,6 @@ const CalendarContainer: React.FC = () => {
         sortByMonth(currentYear, currentMonth);
     }, [tasks, currentMonth, currentYear])
 
-    console.log(currentMonth);
-
     let obj = getDaysInMonth(chosenDate.getFullYear(), chosenDate.getMonth());
 
     return(

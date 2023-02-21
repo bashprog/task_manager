@@ -18,8 +18,6 @@ const Calendar: React.FC<IProps> = ({totalDays, startDayNum}) => {
     const {setDay, currentDay} = useDateStore();
     const {sortedForCalendar} = useTaskStore();
 
-    console.log(sortedForCalendar);
-
     return (
         <section className={'calendar'}>
             <CalendarControl/>
@@ -57,9 +55,9 @@ const Calendar: React.FC<IProps> = ({totalDays, startDayNum}) => {
                                 <>
                                     {sortedForCalendar.filter((val: any) => val.startDay == (key - startDayNum + 1)).map((el: any, idx: number) => {
                                         if (idx < 3) {
-                                            return <CalendarTask key={el.id} props={el}/>
+                                            return <CalendarTask key={el.id} color={el.color} title={el.title}/>
                                         } else {
-                                            return <span className={'more'} key={idx}>+{idx-2} more</span>
+                                            return <span className={'more'} key={idx}>+{idx - 2} more</span>
                                         }
                                     })}
                                 </>
