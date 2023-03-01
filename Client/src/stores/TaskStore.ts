@@ -18,7 +18,7 @@ interface TaskStore {
     selectTaskById: (id: number | string) => void,
     addTask: (task: any) => void,
     sortByDate: (year: number, month: number, day: number) => void,
-    sortByMonth: (year: number, month: number) => void
+    sortByMonth: (year: number, month: number) => void,
 }
 
 class TaskClass {
@@ -45,6 +45,8 @@ class TaskClass {
     endHours: number;
     endMinutes: number;
 
+    position: number | null;
+
     timeDiffInMinutes: number;
 
     constructor(startDate: string, startTime: string, endDate: string, endTime: string, title: string, description: string, color: string) {
@@ -56,6 +58,7 @@ class TaskClass {
         this.title = title;
         this.description = description;
         this.color = color;
+        this.position = null;
 
         this.init();
     }
@@ -91,6 +94,7 @@ class TaskClass {
 
         this.timeDiffInMinutes = Math.ceil((this.endDateWithTime.getTime() - this.startDateWithTime.getTime())/1000/60)
 
+        this.setPosition(0);
     }
 
     sortConditions(year: number, month: number, day: number): boolean{
@@ -128,6 +132,10 @@ class TaskClass {
             (parseInt(endTime.substring(3)) - parseInt(startTime.substring(3)))
 
         return [startTime, endTime, timeDiff];
+    }
+
+    setPosition(num: number) {
+        this.position = num;
     }
 }
 

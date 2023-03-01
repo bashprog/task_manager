@@ -4,7 +4,7 @@ import {immer} from "zustand/middleware/immer";
 
 import {devtools} from "zustand/middleware";
 
-import {getDateInfo, getDaysInMonth} from "../helpers/datesHelper";
+import {getDaysInMonth} from "../helpers/datesHelper";
 
 interface DateStore {
     chosenDate: Date,

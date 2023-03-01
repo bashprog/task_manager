@@ -20,31 +20,27 @@ interface IProps {
     description: string,
     color: string,
     timeDiffInMinutes: number,
+    position?: number,
     members?: any[],
     getTimeInDay?: string[]
-    
 }
 
 const Task: React.FC<IProps> = (props) => {
     const {selectTaskById} = useTaskStore();
-    const [styles, changeStyles] = useState<any>({height: 0, top: 0, left: 0})
 
-    useEffect(() => {
-        if (props.getTimeInDay && props.getTimeInDay[0] != '') {
-            changeStyles({
-                height: props.getTimeInDay[2],
-                top: parseInt(props.getTimeInDay[0].substring(0, 2))*60 + parseInt(props.getTimeInDay[0].substring(3)),
-                left: 0
-            })
-        }
-    }, [props])
+    let styles: any = {height: 0, top: 0, left: 55}
 
-    console.log(styles);
+    if (props.getTimeInDay) {
+        styles.height = props.getTimeInDay[2];
+        styles.top = parseInt(props.getTimeInDay[0].substring(0, 2))*60 + parseInt(props.getTimeInDay[0].substring(3));
+        if (props.position)
+            styles.left = 55 + props.position * 5;
+    }
 
     return (
         <div className={`task ${props.color} ${props.timeDiffInMinutes >= 45 && 'column'}`}
              style={{
-                 height: `${styles.height}px`, top: `${styles.top}px`,
+                 height: `${styles.height}px`, top: `${styles.top}px`, left: `${styles.left}px`
              }}
              onClick={() => selectTaskById(props.id)}>
                             <span className="task-time">

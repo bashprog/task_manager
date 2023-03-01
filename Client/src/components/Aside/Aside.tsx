@@ -22,7 +22,34 @@ const Aside: React.FC = () => {
         sortByDate(currentYear, currentMonth, currentDay);
     }, [currentDay, currentMonth, currentYear, tasks]);
 
-    console.log('sortedArray', sortedArray);
+    function inTime(startHours: number, startMinutes: number, endHours: number, endMinutes: number, forStartHour: number, forStartMinutes: number) {
+        if (forStartHour >= startHours && forStartHour <= endHours) {
+            if ((forStartHour > startHours) || (forStartMinutes >= startMinutes && forStartMinutes <= endMinutes)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    function setPositions() {
+        let maxPos = 0;
+        sortedArray.forEach((el, key) => {
+            sortedArray.forEach((val, idx) => {
+                console.log(inTime(el.startHours, el.startMinutes, el.endHours, el.endMinutes, val.startHours, val.startMinutes))
+                if (idx !== key) {
+                    if (inTime(el.startHours, el.startMinutes, el.endHours, el.endMinutes, val.startHours, val.startMinutes) && el.position == val.position) {
+                        ++maxPos;
+                        val.setPosition(maxPos);
+                    }
+                }
+            })
+        })
+    }
+
+    setPositions()
 
     return(
         <div className={'aside'}>
@@ -46,8 +73,8 @@ const Aside: React.FC = () => {
                             <span className="time-span">{`${timeFormat(key)}:00`}</span>
                         </div>
                     ))}
-                    {sortedArray.map((el: any) => {
-                        return <Task {... el} getTimeInDay={el.getTimeInDay(currentDay)} key={el.id}/>
+                    {sortedArray.map((el: any, key: number) => {
+                        return <Task {... el} getTimeInDay={el.getTimeInDay(currentDay)} test={key} key={el.id}/>
                     })}
                 </div>
             </div>
