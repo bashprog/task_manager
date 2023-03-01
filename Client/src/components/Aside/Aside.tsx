@@ -22,6 +22,8 @@ const Aside: React.FC = () => {
         sortByDate(currentYear, currentMonth, currentDay);
     }, [currentDay, currentMonth, currentYear, tasks]);
 
+    console.log('sortedArray', sortedArray);
+
     return(
         <div className={'aside'}>
             <div className={'day-box'}>
@@ -41,14 +43,12 @@ const Aside: React.FC = () => {
                 <div className="time">
                     {new Array(24).fill(null).map((el, key) => (
                         <div data-time={`${timeFormat(key)}:00`} key={key}>
-                            {sortedArray.map((el: any) => (
-                                el.startTime.substring(0,2) == timeFormat(key) ?
-                                    <Task {... el} key={el.id} maxHeight={(24-key)*60}/>
-                                : null
-                            ))}
                             <span className="time-span">{`${timeFormat(key)}:00`}</span>
                         </div>
                     ))}
+                    {sortedArray.map((el: any) => {
+                        return <Task {... el} getTimeInDay={el.getTimeInDay(currentDay)} key={el.id}/>
+                    })}
                 </div>
             </div>
             <Event {... chosenTask}/>

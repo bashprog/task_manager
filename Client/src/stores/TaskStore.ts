@@ -102,8 +102,8 @@ class TaskClass {
     }
 
     getTimeInDay(day: number){
-        let startTime = null;
-        let endTime = null;
+        let startTime = '';
+        let endTime = '';
 
         let date = new Date(this.startYear, this.startMonth, day);
 
@@ -124,7 +124,10 @@ class TaskClass {
             }
         }
 
-        return [startTime, endTime];
+        let timeDiff = 60*(parseInt(endTime.substring(0,2)) - parseInt(startTime.substring(0,2))) +
+            (parseInt(endTime.substring(3)) - parseInt(startTime.substring(3)))
+
+        return [startTime, endTime, timeDiff];
     }
 }
 

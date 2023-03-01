@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import './Task.scss';
 
@@ -21,17 +21,30 @@ interface IProps {
     color: string,
     timeDiffInMinutes: number,
     members?: any[],
-    maxHeight?: number,
+    getTimeInDay?: string[]
+    
 }
 
 const Task: React.FC<IProps> = (props) => {
     const {selectTaskById} = useTaskStore();
+    const [styles, changeStyles] = useState<any>({height: 0, top: 0, left: 0})
+
+    useEffect(() => {
+        if (props.getTimeInDay && props.getTimeInDay[0] != '') {
+            changeStyles({
+                height: props.getTimeInDay[2],
+                top: parseInt(props.getTimeInDay[0].substring(0, 2))*60 + parseInt(props.getTimeInDay[0].substring(3)),
+                left: 0
+            })
+        }
+    }, [props])
+
+    console.log(styles);
+
     return (
         <div className={`task ${props.color} ${props.timeDiffInMinutes >= 45 && 'column'}`}
              style={{
-                 height: `${props.timeDiffInMinutes}px`,
-                 top: `${props.startTime.substring(3)}px`,
-                 maxHeight: `${props.maxHeight}px`
+                 height: `${styles.height}px`, top: `${styles.top}px`,
              }}
              onClick={() => selectTaskById(props.id)}>
                             <span className="task-time">
