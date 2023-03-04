@@ -39,3 +39,77 @@ export const timeFormat = (str: any) => {
 
     return `${str}`;
 }
+
+
+
+export function setPositions(array: any, chosenDay: number) {
+    console.log('setPositions');
+    let maxPos = 0;
+    array.forEach((el: any, key: number) => {
+        array.forEach((val: any, idx: number) => {
+            if (idx !== key) {
+                if (f(el, val) && el.position == val.position) {
+                    ++maxPos;
+                    val.setPosition(maxPos);
+                }
+            }
+        })
+    })
+
+    let a = t(array, chosenDay);
+    if (a)
+        setPositions(array, chosenDay);
+}
+
+function t(array: any, chosenDay: number) {
+    console.log('t');
+    let pos = 0;
+    let returner = false;
+    array.forEach((el: any, key: number) => {
+        array.forEach((val: any, idx: number) => {
+            if (idx !== key) {
+                if (el.position < val.position && el.getTimeInDay(chosenDay)[2] > val.getTimeInDay(chosenDay)[2]) {
+                    pos = el.position;
+                    el.position = val.position;
+                    val.position = pos;
+                    returner = true;
+                }
+            }
+        })
+    })
+
+    return returner;
+}
+
+function f(el: any, cel: any) {
+    console.log('f');
+    //cel = compared element
+
+    let sh = el.startHours;
+    let sm = el.startMinutes;
+    let eh = el.endHours;
+    let em = el.endMinutes;
+
+    let csh = cel.startHours;
+    let csm = cel.startMinutes;
+    let ceh = cel.endHours;
+    let cem = cel.endMinutes;
+
+    if (sh <= csh && eh >= csh) {
+        return (sh < csh) || (eh < ceh) || (sh == csh && sm <= csm) || (eh == ceh && em > cem);
+    } else  {
+        return false;
+    }
+}
+
+function inTime(sh: number, sm: number, eh: number, em: number, csh: number, csm: number) {
+    // if (forStartHour >= startHours && forStartHour <= endHours) {
+    //     if ((forStartHour > startHours) || (forStartMinutes >= startMinutes && forStartMinutes <= endMinutes)) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // } else {
+    //     return false;
+    // }
+}

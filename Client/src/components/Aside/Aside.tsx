@@ -9,6 +9,7 @@ import placeholder from "../../img/avatar.jpg"
 import {useDateStore} from "../../stores/CalendarStore";
 import {useTaskStore} from "../../stores/TaskStore";
 import {timeFormat, months} from "../../helpers/datesHelper";
+import {setPositions} from "../../helpers/datesHelper";
 
 import Task from "../Task/Task";
 import Event from "../Event/Event";
@@ -22,34 +23,7 @@ const Aside: React.FC = () => {
         sortByDate(currentYear, currentMonth, currentDay);
     }, [currentDay, currentMonth, currentYear, tasks]);
 
-    function inTime(startHours: number, startMinutes: number, endHours: number, endMinutes: number, forStartHour: number, forStartMinutes: number) {
-        if (forStartHour >= startHours && forStartHour <= endHours) {
-            if ((forStartHour > startHours) || (forStartMinutes >= startMinutes && forStartMinutes <= endMinutes)) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    function setPositions() {
-        let maxPos = 0;
-        sortedArray.forEach((el, key) => {
-            sortedArray.forEach((val, idx) => {
-                console.log(inTime(el.startHours, el.startMinutes, el.endHours, el.endMinutes, val.startHours, val.startMinutes))
-                if (idx !== key) {
-                    if (inTime(el.startHours, el.startMinutes, el.endHours, el.endMinutes, val.startHours, val.startMinutes) && el.position == val.position) {
-                        ++maxPos;
-                        val.setPosition(maxPos);
-                    }
-                }
-            })
-        })
-    }
-
-    setPositions()
+    setPositions(sortedArray, currentDay);
 
     return(
         <div className={'aside'}>
